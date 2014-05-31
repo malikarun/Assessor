@@ -1,0 +1,19 @@
+.col-md-2.col-sm-4.col-xs-12= render "index"
+
+.col-md-5.col-sm-4.col-xs-12
+  %h3.text-primary Bests of the week
+  .btn-gorup.btn-group-xs
+    =link_to fa_icon('list', text: 'View all'), '#', class: 'btn btn-xs btn-info'
+    =link_to fa_icon('plus', text: 'Add a best'), '#', class: 'btn btn-xs btn-success'
+    %br
+    %br
+  = render "best"
+
+.col-md-5.col-sm-4.col-xs-12
+  %h3.text-primary Duds of the week
+  .btn-gorup.btn-group-xs
+    =link_to fa_icon('list', text: 'View all'), '#', class: 'btn btn-xs btn-info'
+    =link_to fa_icon('plus', text: 'Add a best'), '#', class: 'btn btn-xs btn-success'
+    %br
+    %br
+  = render "dud"
