@@ -11,7 +11,85 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528092344) do
+ActiveRecord::Schema.define(version: 20140607224220) do
+
+  create_table "ages", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bests", force: true do |t|
+    t.string   "name"
+    t.integer  "gender_id"
+    t.integer  "age_id"
+    t.integer  "color_id"
+    t.integer  "hair_color_id"
+    t.integer  "height_id"
+    t.integer  "eye_color_id"
+    t.integer  "body_type_id"
+    t.integer  "ethinicity_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "body_types", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "colors", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "duds", force: true do |t|
+    t.string   "name"
+    t.integer  "gender_id"
+    t.integer  "age_id"
+    t.integer  "color_id"
+    t.integer  "hair_color_id"
+    t.integer  "height_id"
+    t.integer  "eye_color_id"
+    t.integer  "body_type_id"
+    t.integer  "ethinicity_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ethinicities", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "eye_colors", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "genders", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hair_colors", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "heights", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "first_name",             default: "No Name"
