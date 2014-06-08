@@ -1,0 +1,13 @@
+= simple_form_for @best do |f|
+  = f.input :name
+  = f.input :gender
+  = f.input :gender_id
+  = f.input :age_id
+  = f.input :color_id
+  = f.input :height_id
+  = f.input :hair_color_id
+  = f.input :eye_color_id
+  = f.input :body_type_id
+  = f.input :ethinicity_id
+  = f.button :submit, class: 'btn-primary'
+  = link_to t('.cancel', default: t("helpers.links.cancel")), root_path, class: 'btn'
