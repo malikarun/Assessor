@@ -1,7 +1,7 @@
 class CreateBests < ActiveRecord::Migration
   def change
     create_table :bests do |t|
-      t.string :name
+      t.string :title
       t.integer :gender_id
       t.integer :age_id
       t.integer :color_id

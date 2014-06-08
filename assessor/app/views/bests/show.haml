@@ -1,2 +1,26 @@
-%h1 Bests#show
-%p Find me in app/views/bests/show.html.haml
+.panel.panel-success
+  .panel-heading
+    %strong.pull-left
+      = image_tag avatar_url(@best.user)
+      = @best.user.first_name
+    %small
+      %em.pull-right.text-danger Today at 5:03PM
+    .clearfix
+  .panel-body
+    %p= @best.description
+  .panel-footer
+    %ul.nav-justified
+      %li=link_to fa_icon('thumbs-o-up', text: 'Like'), '#'
+      %li= social_share_button_tag('hello', url: 'http://www.google.com')
+    - @best.comments.each do |comment|
+      %p
+        = image_tag avatar_url(comment.user)
+        %em.small= comment.user.full_name
+        %small= comment.title
+    %hr
+    .col-md-1.col-xs-1.col-sm-1= image_tag avatar_url(current_user)
+    .col-md-11.col-xs-11.col-sm-11
+      = simple_form_for current_user.comments.new, url: comments_path(commentable_type: @best.class.to_s, commentable_id: @best.id) do |f|
+        = f.input :title, as: :text, label: false
+        = f.submit 'comment', class: 'btn btn-xs btn-primary pull-right'
+    .clearfix

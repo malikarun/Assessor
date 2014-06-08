@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607234925) do
+ActiveRecord::Schema.define(version: 20140608075608) do
 
   create_table "ages", force: true do |t|
     t.string   "title"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140607234925) do
   end
 
   create_table "bests", force: true do |t|
-    t.string   "name"
+    t.string   "title"
     t.integer  "gender_id"
     t.integer  "age_id"
     t.integer  "color_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140607234925) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "body_types", force: true do |t|
@@ -46,8 +47,17 @@ ActiveRecord::Schema.define(version: 20140607234925) do
     t.datetime "updated_at"
   end
 
+  create_table "comments", force: true do |t|
+    t.string   "title"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "duds", force: true do |t|
-    t.string   "name"
+    t.string   "title"
     t.integer  "gender_id"
     t.integer  "age_id"
     t.integer  "color_id"
@@ -59,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140607234925) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "ethinicities", force: true do |t|

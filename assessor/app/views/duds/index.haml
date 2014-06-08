@@ -1,2 +1,17 @@
-%h1 Bests#index
-%p Find me in app/views/bests/index.html.haml
+- model_class = Dud
+-@duds = @duds || duds
+- @duds.each do |dud|
+  .panel.panel-warning
+    .panel-heading
+      %strong.pull-left
+        = image_tag avatar_url(dud.user)
+        = dud.user.full_name
+      %small
+        %em.pull-right.text-danger Today at 5:03PM
+      .clearfix
+    .panel-body
+      %p= dud.description
+    .panel-footer
+      %ul.nav-justified
+        %li=link_to fa_icon('thumbs-o-up', text: 'Like'), '#'
+        %li= social_share_button_tag('hello', url: 'http://www.google.com')

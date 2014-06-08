@@ -1,2 +1,4 @@
-%h1 Bests#new
-%p Find me in app/views/bests/new.html.haml
+- model_class = Dud
+.page-header
+  %h1=t '.title', default: [:'helpers.titles.new', 'New %{model}'], model: model_class.model_name.human.titleize
+= render "form"

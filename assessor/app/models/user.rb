@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
+  has_many :bests
+  has_many :duds
+  has_many :comments
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
@@ -15,7 +17,8 @@ class User < ActiveRecord::Base
       if registered_user
         return registered_user
       else
-        user = User.create(name: auth.extra.raw_info.name,
+        user = User.create(first_name: auth.extra.raw_info.first_name,
+          last_name: auth.extra.raw_info.last_name,
           provider: auth.provider,
           uid: auth.uid,
           email: auth.info.email,
@@ -23,5 +26,9 @@ class User < ActiveRecord::Base
         )
       end
     end
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end
