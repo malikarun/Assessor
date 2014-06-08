@@ -1,23 +1,15 @@
-/ .col-md-6.col-sm-6.col-xs-12
-/   %h3.text-primary Bests of the week
-/   .btn-gorup.btn-group-xs
-/     =link_to fa_icon('list', text: 'View all'), bests_path, class: 'btn btn-xs btn-info'
-/     =link_to fa_icon('plus', text: 'Add a best'), new_best_path, class: 'btn btn-xs btn-success'
-/     %br
-/     %br
-/   = render "best"
-
-/ .col-md-6.col-sm-6.col-xs-12
-/   %h3.text-primary Duds of the week
-/   .btn-gorup.btn-group-xs
-/     =link_to fa_icon('list', text: 'View all'), duds_path, class: 'btn btn-xs btn-info'
-/     =link_to fa_icon('plus', text: 'Add a dud'), new_dud_path, class: 'btn btn-xs btn-success'
-/     %br
-/     %br
-/   = render "dud"
-
 .col-md-6.col-sm-6.col-xs-12
+  %h4.text-primary Bests of the week
+  .btn-gorup.btn-group-xs
+    =link_to fa_icon('list', text: 'View all'), bests_path, class: 'btn btn-xs btn-info'
+    =link_to fa_icon('plus', text: 'Add a best'), new_best_path, class: 'btn btn-xs btn-success'
+  %br
   = render template: "bests/index", layout: false, locals: {bests: Best.all}
 
 .col-md-6.col-sm-6.col-xs-12
+  %h4.text-primary Duds of the week
+  .btn-gorup.btn-group-xs
+    =link_to fa_icon('list', text: 'View all'), duds_path, class: 'btn btn-xs btn-info'
+    =link_to fa_icon('plus', text: 'Add a dud'), new_dud_path, class: 'btn btn-xs btn-success'
+  %br
   = render template: "duds/index", layout: false, locals: {duds: Dud.all}

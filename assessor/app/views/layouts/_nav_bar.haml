@@ -14,6 +14,9 @@
           %li.text-warning= link_to 'Sign up', new_user_registration_path
       - else
         %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{href: "#", data: {toggle: 'dropdown'}}
+              .fb-like{data: {action: "like", href: root_url, layout: "standard", share: "true", 'show-faces' => "true"}}
           %li.dropdown
             %a.dropdown-toggle{href: "#", data: {toggle: 'dropdown'}}
               =current_user.first_name
