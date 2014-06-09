@@ -7,11 +7,22 @@
         = image_tag avatar_url(dud.user)
         = dud.user.full_name
       %small
-        %em.pull-right.text-danger Today at 5:03PM
+        %em.pull-right.text-danger= "#{distance_of_time_in_words(dud.created_at, Time.now)} ago"
       .clearfix
     .panel-body
       %p= dud.description
     .panel-footer
-      %ul.nav-justified
-        %li=link_to fa_icon('thumbs-o-up', text: 'Like'), '#'
-        %li= social_share_button_tag('hello', url: 'http://www.google.com')
+      .fb-like{data: {action: "like", href: dud_url(dud), layout: "standard", share: "true"}}
+      = social_share_button_tag(dud.title, url: dud_url(dud))
+      - dud.comments.each do |comment|
+        %p
+          = image_tag avatar_url(comment.user)
+          %em.small= comment.user.full_name
+          %small= comment.title
+      %hr
+      .col-md-1.col-xs-1.col-sm-1= image_tag avatar_url(current_user)
+      .col-md-11.col-xs-11.col-sm-11
+        = simple_form_for current_user.comments.new, url: comments_path(commentable_type: dud.class.to_s, commentable_id: dud.id) do |f|
+          = f.input :title, as: :text, label: false
+          = f.submit 'comment', class: 'btn btn-xs btn-primary pull-right'
+      .clearfix

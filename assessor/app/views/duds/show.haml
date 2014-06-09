@@ -4,14 +4,13 @@
       = image_tag avatar_url(@dud.user)
       = @dud.user.first_name
     %small
-      %em.pull-right.text-danger Today at 5:03PM
+      %em.pull-right.text-danger= "#{time_ago_in_words(dud.created_at)} ago"
     .clearfix
   .panel-body
     %p= @dud.description
   .panel-footer
-    %ul.nav-justified
-      %li=link_to fa_icon('thumbs-o-up', text: 'Like'), '#'
-      %li= social_share_button_tag('hello', url: 'http://www.google.com')
+    .fb-like{data: {action: "like", href: dud_url(@dud), layout: "standard", share: "true"}}
+    = social_share_button_tag(@dud.title, url: dud_url(@dud))
     - @dud.comments.each do |comment|
       %p
         = image_tag avatar_url(comment.user)
