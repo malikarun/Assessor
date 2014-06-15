@@ -10,13 +10,12 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       - unless current_user
         %ul.nav.navbar-nav.navbar-right
+          %li.text-success= link_to 'About Us', about_path
           %li.text-success= link_to 'Login', new_user_session_path
           %li.text-warning= link_to 'Sign up', new_user_registration_path
       - else
         %ul.nav.navbar-nav.navbar-right
-          %li
-            %a{href: "#", data: {toggle: 'dropdown'}}
-              .fb-like{data: {action: "like", href: root_url, layout: "standard", share: "true", 'show-faces' => "true"}}
+          %li.text-success= link_to 'About Us', about_path
           %li.dropdown
             %a.dropdown-toggle{href: "#", data: {toggle: 'dropdown'}}
               =current_user.first_name

@@ -61,6 +61,13 @@ class BestsController < ApplicationController
     end
   end
 
+  def search
+    if request.post?
+      @bests = Best.where params[:best].delete_if{|key, value| value.blank? }
+      render action: :index
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_best

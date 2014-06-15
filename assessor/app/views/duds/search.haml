@@ -1,0 +1,12 @@
+= simple_form_for Dud.new, url: search_duds_path do |f|
+  = f.input :title
+  = f.input :gender_id, collection: Gender.all
+  = f.input :age_id, collection: Age.all
+  = f.input :color_id, collection: Color.all
+  = f.input :height_id, collection: Height.all
+  = f.input :hair_color_id, collection: HairColor.all
+  = f.input :eye_color_id, collection: EyeColor.all
+  = f.input :body_type_id, collection: BodyType.all
+  = f.input :ethinicity_id, collection: Ethinicity.all
+  = f.submit "Find Duds", class: 'btn btn-primary'
+  = link_to t('.cancel', default: t("helpers.links.cancel")), root_path, class: 'btn'

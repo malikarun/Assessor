@@ -4,18 +4,19 @@
       = image_tag avatar_url(@best.user)
       = @best.user.first_name
     %small
-      %em.pull-right.text-danger= "#{time_ago_in_words(best.created_at)} ago"
+      %em.pull-right.text-danger= "#{time_ago_in_words(@best.created_at)} ago"
     .clearfix
   .panel-body
     %p= @best.description
   .panel-footer
     .fb-like{data: {action: "like", href: best_url(@best), layout: "standard", share: "true"}}
     = social_share_button_tag(@best.title, url: best_url(@best))
-    - @best.comments.each do |comment|
+    - @best.comments.includes(:user).each do |comment|
       %p
         = image_tag avatar_url(comment.user)
         %em.small= comment.user.full_name
         %small= comment.title
+        %small.pull-right= "#{distance_of_time_in_words(comment.created_at, Time.now)} ago"
     %hr
     .col-md-1.col-xs-1.col-sm-1= image_tag avatar_url(current_user)
     .col-md-11.col-xs-11.col-sm-11

@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'ready page:load page:change', ->
   window.fbAsyncInit = ->
     FB.init
       appId: 313947082104988
@@ -8,7 +8,6 @@ $ ->
     return
 
   ((d, s, id) ->
-    js = undefined
     fjs = d.getElementsByTagName(s)[0]
     return  if d.getElementById(id)
     js = d.createElement(s)

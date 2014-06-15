@@ -3,13 +3,15 @@
   .btn-gorup.btn-group-xs
     =link_to fa_icon('list', text: 'View all'), bests_path, class: 'btn btn-xs btn-info'
     =link_to fa_icon('plus', text: 'Add a best'), new_best_path, class: 'btn btn-xs btn-success'
+    =link_to fa_icon('search', text: 'Search Bests'), search_bests_path, class: 'btn btn-xs btn-default'
   %br
-  = render template: "bests/index", layout: false, locals: {bests: Best.all}
+  = render template: "bests/index", layout: false, locals: {bests: Best.includes(comments: :user).last(20).reverse}
 
 .col-md-6.col-sm-6.col-xs-12
   %h4.text-primary Duds of the week
   .btn-gorup.btn-group-xs
     =link_to fa_icon('list', text: 'View all'), duds_path, class: 'btn btn-xs btn-info'
     =link_to fa_icon('plus', text: 'Add a dud'), new_dud_path, class: 'btn btn-xs btn-success'
+    =link_to fa_icon('search', text: 'Search Duds'), search_duds_path, class: 'btn btn-xs btn-default'
   %br
-  = render template: "duds/index", layout: false, locals: {duds: Dud.all}
+  = render template: "duds/index", layout: false, locals: {duds: Dud.includes(comments: :user).last(20).reverse}
