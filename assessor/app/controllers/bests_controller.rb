@@ -1,5 +1,6 @@
 class BestsController < ApplicationController
   before_action :set_best, only: [:show, :edit, :update, :destroy]
+  geocode_ip_address
 
   # GET /bests
   # GET /bests.json

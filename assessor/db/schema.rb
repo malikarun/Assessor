@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140608075608) do
+ActiveRecord::Schema.define(version: 20140621065340) do
 
   create_table "ages", force: true do |t|
     t.string   "title"
@@ -98,6 +98,15 @@ ActiveRecord::Schema.define(version: 20140608075608) do
 
   create_table "heights", force: true do |t|
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

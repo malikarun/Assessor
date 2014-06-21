@@ -1,5 +1,6 @@
 class DudsController < ApplicationController
   before_action :set_dud, only: [:show, :edit, :update, :destroy]
+  geocode_ip_address
 
   # GET /duds
   # GET /duds.json

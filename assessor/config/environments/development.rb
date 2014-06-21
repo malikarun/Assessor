@@ -36,4 +36,11 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  class ActionDispatch::Request
+    def remote_ip
+      "101.165.227.86" # fill in your IP address here
+      # "192.168.0.11" # fill in your IP address here
+    end
+  end
 end
