@@ -29,6 +29,7 @@ class BestsController < ApplicationController
 
     respond_to do |format|
       if @best.save
+        # @best.location.create lat: session[:geo_location][:lat].strip, lan: session[:geo_location][:lng].strip
         format.html { redirect_to @best, notice: 'best was successfully created.' }
         format.json { render :show, status: :created, location: @best }
       else
