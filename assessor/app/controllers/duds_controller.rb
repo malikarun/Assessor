@@ -69,14 +69,14 @@ class DudsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_dud
-      @dud = Dud.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_dud
+    @dud = Dud.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dud_params
-       params.require(:dud).permit!
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def dud_params
+     params.require(:dud).permit!
+  end
 end

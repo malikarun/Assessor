@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :bests
   has_many :duds
+  has_many :topics
   has_many :comments
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

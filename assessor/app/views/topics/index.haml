@@ -1,0 +1,107 @@
+- unless @topics.blank?
+  - @topics.each do |topic|
+    .panel.panel-info
+      .panel-heading
+        %strong.pull-left
+          = image_tag avatar_url(topic.user)
+          = topic.user.full_name
+        %small
+          %em.pull-right.text-danger= "#{time_ago_in_words(topic.created_at)} ago"
+        .clearfix
+      .panel-body
+        %p= topic.description
+      .panel-footer
+        .fb-like{data: {action: "like", href: topic_url(topic), layout: "standard", share: "true"}}
+        = social_share_button_tag(topic.title, url: topic_url(topic))
+
+        - topic.comments.each do |comment|
+          %p
+            = image_tag avatar_url(comment.user)
+            %em.small= comment.user.full_name
+            %small= comment.title
+            %small.pull-right= "#{distance_of_time_in_words(comment.created_at, Time.now)} ago"
+        %hr
+        .col-md-1.col-xs-1.col-sm-1= image_tag avatar_url(current_user)
+        .col-md-11.col-xs-11.col-sm-11
+          = simple_form_for current_user.comments.new, url: comments_path(commentable_type: topic.class.to_s, commentable_id: topic.id) do |f|
+            = f.input :title, as: :text, label: false
+            = f.submit 'comment', class: 'btn btn-xs btn-primary pull-right'
+        .clearfix
+- else
+  .alert.alert-info
+    %span No topic found
+    %span.pull-right= link_to 'Add Topic', new_topic_path, class: 'btn btn-primary'
+
+/ .row
+/   .col-md-12
+/     .page-header
+/       %h1
+/         =@forum.title
+/         %small
+/           %i.icon-double-angle-right
+/           Forum's Topics
+/       =link_to 'Back', app_path(@app), class: 'btn btn-primary'
+
+/     %table#forum_topics.table.table-striped.table-bordered.table-hover#datatable
+/       %thead
+/         %tr
+/           %th Status
+/           %th Title
+/           %th Created By
+/           %th Posts
+/           %th Views
+/           %th Last Post
+/           %th
+/       %tbody
+/         - @forum_topics.each do |forum_topic|
+
+/           %tr
+/             - if forum_topic.locked
+/               %td.center{style: 'color: #5bc0de'}
+
+/                 = iconic ('lock')
+/             - elsif forum_topic.sticky?
+/               %td.center{style: 'color: #f0ad4e'}
+/                 =  iconic('thumb-tack')
+/             - else
+/               %td.center{style: 'color: #55a79a'}
+/                 = iconic ('comment')
+
+/             %td= link_to forum_topic.title , app_forum_forum_topic_forum_posts_path(@app, @forum, forum_topic)
+/             %td
+/               %strong= User.find(forum_topic.user_id).name
+/               / %strong= User.where(id: forum_topic.user_id).first.name
+/               %br
+/               %small
+/                 = "#{forum_topic.created_at.strftime("%b")} #{forum_topic.created_at.strftime("%d").to_i.ordinalize} , #{forum_topic.created_at.strftime("20%y")}"
+/                 %em
+/                 |
+/                 = "#{forum_topic.created_at.strftime("%T")} AEST"
+/             %td= forum_topic.posts_count
+/             %td= forum_topic.hits
+/             %td
+/               - unless forum_topic.last_post_id.nil?
+/                 %strong= User.find(ForumPost.find(forum_topic.last_post_id).user_id).name
+/                 %br
+/                 %small
+
+/                 = link_to 'view', app_forum_forum_topic_forum_post_path(@app, @forum, forum_topic, ForumPost.find(forum_topic.last_post_id))
+/             %td.center
+/               - if (forum_topic.try(:user_id) == current_user.id && forum_topic.posts_count == 0) || (can? :manage, @forum)
+/                 = link_to iconic('pencil') , edit_app_forum_forum_topic_path(@app, @forum, forum_topic), class: ' btn btn-primary btn-xs'
+
+/                 = link_to iconic('trash-o'), app_forum_forum_topic_path(@app, @forum, forum_topic) , method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-xs'
+/               - if can? :manage, @forum
+/                 - if forum_topic.locked
+/                   = link_to iconic('unlock-alt'), lock_app_forum_forum_topic_path(@app, @forum, forum_topic), class: 'btn btn-info btn-xs'
+/                 - else
+/                   = link_to iconic('lock'), lock_app_forum_forum_topic_path(@app, @forum, forum_topic), class: 'btn btn-info btn-xs'
+/               - if can? :manage, @forum
+/                 - unless forum_topic.locked
+/                   - if forum_topic.sticky?
+/                     = link_to iconic('comment'), sticky_app_forum_forum_topic_path(@app, @forum, forum_topic), class: 'btn btn-warning btn-xs', style: 'color: #55a79a'
+/                   - else
+/                     = link_to iconic('thumb-tack'),  sticky_app_forum_forum_topic_path(@app, @forum, forum_topic) , class: 'btn btn-warning btn-xs'
+/     %br
+
+/     = link_to 'Add Topic', new_app_forum_forum_topic_path(@app,@forum), class: 'btn btn-primary'

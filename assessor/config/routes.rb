@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     get :search, on: :collection
     post :search, on: :collection
   end
+  resources :topics do
+    get :search, on: :collection
+    post :search, on: :collection
+  end
   resources :comments
   root 'public#index'
 end

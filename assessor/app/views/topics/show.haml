@@ -1,0 +1,53 @@
+.panel.panel-info
+  .panel-heading
+    %strong.pull-left
+      = image_tag avatar_url(@topic.user)
+      = @topic.user.first_name
+    %small
+      %em.pull-right.text-danger= "#{time_ago_in_words(@topic.created_at)} ago"
+    .clearfix
+  .panel-body
+    %p= @topic.description
+  .panel-footer
+    .fb-like{data: {action: "like", href: topic_url(@topic), layout: "standard", share: "true"}}
+    = social_share_button_tag(@topic.title, url: topic_url(@topic))
+    - @topic.comments.includes(:user).each do |comment|
+      %p
+        = image_tag avatar_url(comment.user)
+        %em.small= comment.user.full_name
+        %small= comment.title
+        %small.pull-right= "#{distance_of_time_in_words(comment.created_at, Time.now)} ago"
+    %hr
+    .col-md-1.col-xs-1.col-sm-1= image_tag avatar_url(current_user)
+    .col-md-11.col-xs-11.col-sm-11
+      = simple_form_for current_user.comments.new, url: comments_path(commentable_type: @topic.class.to_s, commentable_id: @topic.id) do |f|
+        = f.input :title, as: :text, label: false
+        = f.submit 'comment', class: 'btn btn-xs btn-primary pull-right'
+    .clearfix
+
+/ .row
+/   .col-md-12
+/     .page-header
+/       %h1
+/         Topics
+/         %small
+/           %i.icon-double-angle-right
+/           = @forum_topic.title
+
+
+/     %table.table.table-striped.table-bordered.table-hover
+/       %thead
+/         %tr
+/           %th Title
+
+
+/       %tbody
+
+/         %tr
+/           %td= @forum_topic.title
+
+/     = link_to 'Posts', app_forum_forum_topic_forum_posts_path(@app, @forum, @forum_topic, @forum_post), class: ' btn btn-primary'
+/     = link_to 'Back', app_forum_forum_topics_path(@app, @forum), class: ' btn btn-primary'
+/     = link_to 'Edit', edit_app_forum_forum_topic_path(@app, @forum, @forum_topic), class: ' btn btn-primary'
+/     = link_to 'Delete', app_forum_forum_topic_path(@app, @forum, @forum_topic) , method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger'
+/
